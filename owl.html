@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Для Вероніки 💜</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
+}
+
+body{
+    height:100vh;
+    background: linear-gradient(135deg,#2a003f,#5a189a,#9d4edd);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+}
+
+.page{ display:none; }
+.page.active{ display:block; }
+
+.card{
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+    padding:50px;
+    border-radius:25px;
+    text-align:center;
+    max-width:560px;
+    box-shadow:0 0 40px rgba(157,78,221,0.5);
+    animation:fadeIn 1.4s ease;
+}
+
+h1{
+    font-size:36px;
+    margin-bottom:20px;
+    color:#e0aaff;
+   
+}
+
+p{
+    font-size:20px;
+    line-height:1.5;
+    margin-bottom:20px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    border-radius:15px;
+    border:none;
+    margin-bottom:15px;
+    font-size:16px;
+}
+
+button{
+    background: linear-gradient(135deg,#7b2cbf,#c77dff);
+    border:none;
+    padding:12px 30px;
+    border-radius:30px;
+    color:white;
+    font-size:17px;
+    cursor:pointer;
+    margin:6px;
+    transition:0.3s;
+    box-shadow:0 0 15px rgba(199,125,255,0.6);
+}
+
+button:hover{ transform:scale(1.05); }
+
+.heart{
+    font-size:38px;
+    margin-top:15px;
+    animation:pulse 1.5s infinite;
+}
+
+.tarot-card{
+    margin-top:25px;
+    padding:25px;
+    border-radius:20px;
+    background: rgba(0,0,0,0.25);
+    box-shadow:0 0 20px rgba(199,125,255,0.6);
+}
+
+.tarot-title{
+    font-size:26px;
+    color:#f3c4ff;
+    margin-bottom:10px;
+}
+
+.tarot-image{
+    max-width:220px;
+    margin:15px auto;
+    border-radius:15px;
+    box-shadow:0 0 20px rgba(199,125,255,0.7);
+    display:block;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.2);}
+    100%{transform:scale(1);}
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(25px);}
+    to{opacity:1; transform:translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- СТОРІНКА 1 — ЗВЕРНЕННЯ -->
+<div class="page active" id="page1">
+    <div class="card">
+        <h1>Вероніко 💜</h1>
+        <p>
+            Ти дуже особлива ✨<br>
+            Світ стає теплішим, коли ти поруч 🌙<br>
+            І нехай це буде маленьким нагадуванням про це
+        </p>
+
+        <button onclick="goToPage(2)">Карта Таро 🔮</button>
+        <button onclick="goToPage(3)">Далі →</button>
+
+        <div class="heart">💜</div>
+    </div>
+</div>
+
+<!-- СТОРІНКА 2 — ТАРО -->
+<div class="page" id="page2">
+    <div class="card">
+        <h1>Запитай карти 🔮</h1>
+        <p>Сформулюй питання і витягни одну карту</p>
+
+        <input id="questionInput" placeholder="Наприклад: Що мені зараз важливо знати?">
+
+        <button onclick="drawTarot()">Витягнути карту</button>
+        <button onclick="goToPage(1)">← Назад</button>
+
+        <div id="tarotResult"></div>
+    </div>
+</div>
+
+<!-- СТОРІНКА 3 — ПУСТА -->
+<div class="page" id="page3">
+    <div class="card">
+        <h1>✨</h1>
+        <p>
+           
+            Служба усунення технічних шоколадок: kseniarishko12@gmail.com  🌌
+        </p>
+
+        <button onclick="goToPage(1)">← На початок</button>
+    </div>
+</div>
+
+<script>
+function goToPage(num){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('page'+num).classList.add('active');
+}
+
+const tarotCards = [
+    { name:"Маг", meaning:"Тлумачення не буде, Вероніка сама все знає.", image:"https://cdn.tarotqa.com/images-optimized/tarot/The_Magician.webp" },
+    { name:"Верховна Жриця", meaning:"Довірся інтуїції🌙", image:"https://cdn.tarotqa.com/images-optimized/tarot/The_High_Priestess.webp" },
+    { name:"Імператриця", meaning:"Тлумачення не буде, Вероніка сама знає🌸", image:"https://cdn.tarotqa.com/images-optimized/tarot/The_Empress.webp" },
+    { name:"Закохані", meaning:"you know💜", image:"https://cdn.tarotqa.com/images-optimized/tarot/The_Lovers.webp" },
+    { name:"Колесо Фортуни", meaning:"Більш твоєї карти не існує.", image:"https://cdn.tarotqa.com/images-optimized/tarot/Wheel_of_Fortune.webp" },
+    { name:"Зірка", meaning:"Зірочка палай✨", image:"https://cdn.tarotqa.com/images-optimized/tarot/The_Star.webp" },
+    { name:"Сонце", meaning:"Vous savez☀️", image:"https://cdn.tarotqa.com/images-optimized/tarot/The_Sun.webp" },
+    { name:"Місяць", meaning:"Досить на нього глипати🌑", image:"https://cdn.tarotqa.com/images-optimized/tarot/The_Moon.webp" },
+    { name:"Світ", meaning:"Vous savez🌍", image:"https://cdn.tarotqa.com/images-optimized/tarot/The_World.webp" },
+	{ name:"Дурень", meaning:"Ясно.", image:"https://cdn.tarotqa.com/images-optimized/tarot/The_Fool.webp" },
+	{ name:"Імператор", meaning:"Осоружний чолов'яга.", image:"https://cdn.tarotqa.com/images-optimized/tarot/The_Emperor.webp" },
+	{ name:"Ієрофант", meaning:"Діагноз: мозкова недостатність.", image:"https://cdn.tarotqa.com/images-optimized/tarot/The_Hierophant.webp" },
+	{ name:"Колісниця", meaning:"you know💜", image:"https://cdn.tarotqa.com/images-optimized/tarot/The_Chariot.webp" },
+	{ name:"Сила", meaning:"Потужно.", image:"https://cdn.tarotqa.com/images-optimized/tarot/Strength.webp" },
+	{ name:"Самітник", meaning:"Знак написати комусь повідомлення!!!", image:"https://cdn.tarotqa.com/images-optimized/tarot/The_Hermit.webp" },
+	{ name:"Справедливість", meaning:"Тлумачення не буде, Вероніка сама все знає.", image:"https://cdn.tarotqa.com/images-optimized/tarot/Justice.webp" },
+	{ name:"Повішений", meaning:"Тлумачення не буде, Вероніка сама все знає.", image:"https://cdn.tarotqa.com/images-optimized/tarot/The_Hanged_Man.webp" },
+	{ name:"Повішений", meaning:"Ого, перевернуті. ", image:"https://yoga.co.ua/wp-content/uploads/2023/11/12the_hangedman-edited.jpg" },
+	{ name:"Смерть", meaning:"Тлумачення не буде, Вероніка сама все знає.", image:"https://cdn.tarotqa.com/images-optimized/tarot/Death.webp" },
+	{ name:"Терплячість", meaning:"Веронік, це не про тебе.", image:"https://cdn.tarotqa.com/images-optimized/tarot/Temperance.webp" },
+	{ name:"Диявол", meaning:"Диявол завжди бреше.", image:"https://cdn.tarotqa.com/images-optimized/tarot/The_Devil.webp" },
+	{ name:"Вежа", meaning:"Єбать блять🤬", image:"https://cdn.tarotqa.com/images-optimized/tarot/The_Tower.webp" },	
+	{ name:"Суд", meaning:"Молись, дитино, молись.", image:"https://cdn.tarotqa.com/images-optimized/tarot/Judgement.webp" },
+	{ name:"Ейс оф жезли", meaning:"Я забула, що таке ace.", image:"https://cdn.tarotqa.com/images-optimized/tarot/Ace_of_Wands.webp" },
+];
+
+function drawTarot(){
+    const question = document.getElementById("questionInput").value.trim();
+    const result = document.getElementById("tarotResult");
+
+    if(!question){
+        result.innerHTML = "<p>Спочатку сформулюй питання ✨</p>";
+        return;
+    }
+
+    const card = tarotCards[Math.floor(Math.random()*tarotCards.length)];
+
+    result.innerHTML = `
+        <div class="tarot-card">
+            <p style="opacity:0.8;font-size:16px;">Твоє питання:</p>
+            <p><em>${question}</em></p>
+
+            <div class="tarot-title">${card.name}</div>
+            <img src="${card.image}" class="tarot-image">
+            <p>${card.meaning}</p>
+        </div>
+    `;
+}
+</script>
+
+</body>
+</html>
+
